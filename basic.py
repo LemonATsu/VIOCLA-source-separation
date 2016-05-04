@@ -21,7 +21,7 @@ def B1():
     print(evalSDR(np.array([a, b]), np.array([c, c])/2))
     print("SDR [a;b], [a;b]")
     print(evalSDR(np.array([a, b]), np.array([a, b])))
-    print("SDR [b;b], [a;b]")
+    print("SDR [b;a], [a;b]")
     print(evalSDR(np.array([a, b]), np.array([b, a])))
     print("SDR [2a;2b], [a;b]")
     print(evalSDR(np.array([a, b]), np.array([2*a, 2*b])))
@@ -51,16 +51,22 @@ def B3():
     
     vio_64 = librosa.load(path + 'vio_64.wav', fs)[0][0:61000]
     vio_88 = librosa.load(path + 'vio_88.wav', fs)[0][0:61000]
+    cla_64 = librosa.load('../audio/train/cla/cla_64.wav', fs)[0][0:61000]
    
     S_1 = NMF.extractTemplate(vio_64)
     S_2 = NMF.extractTemplate(vio_88)
+    S_3 = NMF.extractTemplate(cla_64)
  
-    librosa.display.specshow(S_1, y_axis='cqt_note', x_axis='frames', n_yticks=60)
-    plt.axis([0, 2, 0, 150])
+    librosa.display.specshow(S_1, y_axis='cqt_note', x_axis='frames', n_yticks=180)
+    plt.axis([0, 2, 0, 100])
     plt.show()
 
-    librosa.display.specshow(S_2, y_axis='cqt_note', x_axis='frames', n_yticks=60)
-    plt.axis([0, 2, 0, 150])
+    librosa.display.specshow(S_2, y_axis='cqt_note', x_axis='frames', n_yticks=10)
+    #plt.axis([0, 2, 0, 100])
+    plt.show()
+    
+    librosa.display.specshow(S_3, y_axis='cqt_note', x_axis='frames', n_yticks=180)
+    plt.axis([0, 2, 0, 100])
     plt.show()
 
     S_1 = librosa.core.istft(S_1)
@@ -70,7 +76,9 @@ def B3():
     librosa.display.waveplot(S_2, x_axis='time')
     plt.show()
 def evalSDR(ref, est):
+    
     (sdr, sir, sar, perm) = mir_eval.separation.bss_eval_sources(ref, est)
+    print(perm)
     return sdr
 
 def evalBSS(ref, est):
@@ -80,7 +88,7 @@ def evalBSS(ref, est):
 if __name__ == '__main__':
 
     print('Basic 1 : start')
-    B1()
+    #B1()
     print('Basic 1 : end')
 
     print('Basic 2 : start')
