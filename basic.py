@@ -88,11 +88,11 @@ def evalBSS(ref, est):
 if __name__ == '__main__':
 
     print('Basic 1 : start')
-    #B1()
+    B1()
     print('Basic 1 : end')
 
     print('Basic 2 : start')
-    #B2()
+    B2()
     print('Basic 2 : end')
 
 

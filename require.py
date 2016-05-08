@@ -80,7 +80,7 @@ if __name__ == '__main__':
     valid_v = librosa.load(path_valid + '01_vio.wav', 44100)[0]
     valid_c = librosa.load(path_valid + '01_cla.wav', 44100)[0]
     valid_m = librosa.load(path_valid + '01_mix.wav', 44100)[0]
-    # cla_clips = u.readClips('../audio/train/cla/')
+    
     init = False   
     vio_W = extractAllTemplate(vio_clips)
     cla_W = extractAllTemplate(cla_clips)
