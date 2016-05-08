@@ -3,7 +3,7 @@ import basic
 import advance
 import librosa
 import numpy as np
-
+import require
 def estimateValidSet(path, vio_W, cla_W, score_inf=None):
     for i in range(0, 5): 
         p = path + '0'
@@ -55,10 +55,11 @@ def reconstruct(y, a_W, a_H, b_W, b_H):
     
     mask_b = 1
     rec_a = a * phase
-    rec_b = b * phase
-    #mask_b = b**1 / (a**1 + b**1)
-    #rec_b = b * mask_b * phase
+    #rec_b = b * phase
+    mask_b = np.nan_to_num(b**1 / (a**1 + b**1))
+    rec_b = b * mask_b * phase
     #np.abs(D) * mask_b * phase
+    
 
     o_a = librosa.core.istft(rec_a, win_length=NMF.d_w, hop_length=NMF.d_h)
     o_b = librosa.core.istft(rec_b, win_length=NMF.d_w, hop_length=NMF.d_h)

@@ -26,7 +26,7 @@ def extractActivation(y, W, w=d_w, h=d_h):
     return activation.T
 
 
-def mapframe(i, d_h, fs=44100.0):
+def mapframe(i, h=d_h, fs=44100.0):
     return int(float(i / 1000.0) * fs / h) + 1
 
 def cons_Activation(score_inf, H, h_size=d_h, fs=44100.0, time_length=5.0):
@@ -63,5 +63,4 @@ def cons_Activation(score_inf, H, h_size=d_h, fs=44100.0, time_length=5.0):
             u = begin * nc + bound
             l = u + nc
             mask[u:l, r_1:r_2] = 1
-    
     return H * mask

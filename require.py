@@ -39,7 +39,6 @@ def R1(valid, W):
     H = NMF.extractActivation(valid, W)
     r = np.dot(W, H)
     o = librosa.core.istft(r, win_length=NMF.d_w, hop_length=NMF.d_h)
-    print(H[33])
     
     #showDicSpectr(W)
     #showActSpectr(H)
